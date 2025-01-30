@@ -3,8 +3,8 @@
 #include <iomanip>                                  // for std::setprecision(decimal places) << std::fixed << var;
 
 int show_balance(double balance);
-double deposit_money(double balance);
 double withdraw_money(double balance);
+double deposit_money();
 
 int main(){
     using std::cout;
@@ -22,17 +22,22 @@ int main(){
         cin >> user_choice;
         if (std::cin.fail())
         {
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "Enter valid integer\n";
+            continue;
         }
         switch (user_choice){
             case 1 :
                 show_balance(balance);
                 break;
             case 2 :
-                balance = deposit_money(balance);
+                balance += deposit_money();
+                show_balance(balance);
                 break;
             case 3 :
-                balance = withdraw_money(balance);
+                balance -= withdraw_money(balance);
+                show_balance(balance);
                 break;
             case 4 :
                 cout << "Thanks for visiting\n";
@@ -50,13 +55,19 @@ int show_balance(double balance) {
     cout << "Your current balance is $" << std::setprecision(2) << std::fixed << balance << "\n\n";
     return 0;
 }
-double deposit_money(double balance) {
+double deposit_money() {
     using std::cout, std::cin;
     double money;
     do 
     {
         cout << "Enter amount to be deposited : ";
         cin >> money;
+        if (std::cin.fail()) 
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
         if (0 < money)
         {
             break;
@@ -64,10 +75,7 @@ double deposit_money(double balance) {
             cout << "Enter valid amount\n";
         }
     } while (true);
-    balance = balance + money;
-    cout << "You deposited $" << money << "\n";
-    show_balance(balance);
-    return balance;
+    return money;
 }
 double withdraw_money(double balance) {
     using std::cout, std::cin;
@@ -76,6 +84,12 @@ double withdraw_money(double balance) {
     {
         cout << "Enter amount to be withdrawn : ";
         cin >> money;
+        if (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
         if (0 < money && money <= balance)
         {
             break;
@@ -83,8 +97,5 @@ double withdraw_money(double balance) {
             cout << "Enter valid amount\n";
         }
     } while (true);
-    balance = balance - money;
-    cout << "You withdrew $" << money << "\n";
-    show_balance(balance);
-    return balance;
+    return money;
 }
