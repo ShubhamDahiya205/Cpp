@@ -29,6 +29,7 @@ int main(){                                     // main fx()
     bool t_false = true;                        // boolean
     std::string first_name = "Bum";             // object that stores multiple char, in double quotes
     const double PI = 3.14159;                  // read only, can't be modified
+    int percentage = (x / (double)y) * 100;     // int/int will be int
 
     std::cout << "Hi" << z << '\n';   /* stndard char output, >> output, namespace1::var1 ; line terminator */
     std::cout <<"What's you first Name" << std::endl;     // \n is better, endl flushes output buffer
@@ -89,7 +90,29 @@ int main(){                                     // main fx()
     a = std::round(a * 100) / 100
 
 
+    array :
+    data_type array1[] = { dt1, dt2..};               : elements must be of same data type
+    array1 gives memory address of array
+    array1[index] gives element
+    array1[0] = new_dt
+    int array2[5];                                  : fixed size of array
+    array1[index].empty()                           : T/F
+    
+    sizeof(var/data_type)                           : returns size in bytes
+    sizeof(array1) / sizeof(data_type of array)     : gives length of array 
 
+    for (data_type_of_array element_var : array1 ){}    : iterating over array using for each
+    for (int i = 0; !array[i].empty() ; i++)            : loop continues till array[i] gives an empty element
+
+    when array is passed to a fx, it decays to a pointer, that points to the address, where array begins. It doesn't know size of array
+    so, pass size of array as another parameter to the fx
+
+    fill( array1, array1 + SIZE/2, element)             : fills the array1 0 to SIZE/2 - 1 index with the same element1
+    fill( array1 + SIZE/2, array1 + SIZE, element2)     : fills the rest with the element2
+
+    int array_2d[ row size ][ column size ]             : matrix, row size not neccessary
+
+    
 */
     
     return 0;                               
