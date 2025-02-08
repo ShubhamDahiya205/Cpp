@@ -1,31 +1,118 @@
 #include <iostream>
 #include <limits>
+#include <ctime>
 
-char user_input();
-void print_board(char *board);          // pointer to an array board
+void draw_board(char *spaces);  
+void player_move(char *spaces, char player);
+void computer_move(char *spaces, char computer);
+bool check_winner(char *spaces, char player, char computer);
+bool check_tie(char *spaces);
 
-int main(){
-    std::cout << "************************************\n";
-    std::cout << " Welcome to the Game of Tic Tac Toe\n";
-    std::cout << "************************************\n";
+int main()
+{
+    char spaces[9] = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+    char player = 'X';
+    char computer = 'O';
+    bool running = true;
+    draw_board(spaces);
+    while(true){
+        player_move(spaces, player);
+        draw_board(spaces);
+        if (check_winner(spaces, player, computer) || check_tie(spaces)){
+            break;
+        }
+        computer_move(spaces, computer);
+        draw_board(spaces);
+        if (check_winner(spaces, player, computer) || check_tie(spaces)){
+            break;
+        }
+    }
+    std::cout << "Thanks for Playing! \n";
     return 0;
 }
 
-char user_input(){
-    char user_choice;
-    do
-    {
-    std::cin >> user_choice;
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n');
-        continue;
-    }
-    if (user_choice == 'O' || user_choice == 'X'){
-        break;
-    }   else {
-        std::cout << "Enter X or O : ";
-    }
+void draw_board(char *spaces){
+    std::cout << '\n';
+    std::cout << "     |     |     " << '\n';
+    std::cout << "  " << spaces[0] << "  |  " << spaces[1] << "  |  " << spaces[2] << "  " << '\n';
+    std::cout << "_____|_____|_____" << '\n';
+    std::cout << "     |     |     " << '\n';
+    std::cout << "  " << spaces[3] << "  |  " << spaces[4] << "  |  " << spaces[5] << "  " << '\n';
+    std::cout << "_____|_____|_____" << '\n';
+    std::cout << "     |     |     " << '\n';
+    std::cout << "  " << spaces[6] << "  |  " << spaces[7] << "  |  " << spaces[8] << "  " << '\n';
+    std::cout << '\n';
+}
+void player_move(char *spaces, char player){
+    int number;
+    do{
+        std::cout << "Enter a spot to place a marker (1-9): ";
+        std::cin >> number;
+        if (std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+        number--;
+        if(number >= 0 && number <= 8 && spaces[number] == ' '){
+            spaces[number] = player;
+            break;
+        }
     } while (true);
-    return user_choice;
+}
+void computer_move(char *spaces, char computer){
+    int number;
+    srand(time(0));
+    while(true){
+        number = rand() % 9;
+        if (spaces[number] == ' '){
+            spaces[number] = computer;
+            break;
+        }
+    }
+
+}
+bool check_winner(char *spaces, char player, char computer){
+    if (spaces[0] != ' ' && (spaces[0] == spaces[1] && spaces[1] == spaces[2])){
+        spaces[0] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;
+    }
+    if (spaces[3] != ' ' && (spaces[3] == spaces[4] && spaces[4] == spaces[5])){
+        spaces[3] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;
+    }
+    if (spaces[6] != ' ' && (spaces[6] == spaces[7] && spaces[7] == spaces[8])){
+        spaces[6] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;
+    }
+    if (spaces[0] != ' ' && (spaces[0] == spaces[3] && spaces[3] == spaces[6])){
+        spaces[0] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;    
+    } 
+    if (spaces[1] != ' ' && (spaces[1] == spaces[4] && spaces[4] == spaces[7])) {
+        spaces[1] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;        
+    }
+    if (spaces[2] != ' ' && (spaces[2] == spaces[5] && spaces[5] == spaces[8])){
+        spaces[2] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;        
+    } 
+    if (spaces[0] != ' ' && (spaces[0] == spaces[4] && spaces[4] == spaces[8])){
+        spaces[0] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;
+    }
+    if (spaces[2] != ' ' && (spaces[2] == spaces[4] && spaces[4] == spaces[6])){
+        spaces[2] == player ? std::cout << "You WIN !\n" : std::cout << "You LOSE !\n";
+        return true;        
+    }
+    return false;
+}
+bool check_tie(char *spaces){
+    for (int i = 0; i < 9; i++){
+        if (spaces[i] == ' '){
+            return false;
+        }
+    }
+    std::cout << "It's a TIE!";
+    return true;
 }
