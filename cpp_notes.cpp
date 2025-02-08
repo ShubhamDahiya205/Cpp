@@ -28,7 +28,7 @@ int main(){                                     // main fx()
     char d = 100;                               //ascii value                     
     bool t_false = true;                        // boolean
     std::string first_name = "Bum";             // object that stores multiple char, in double quotes
-    const double PI = 3.14159;                  // read only, can't be modified
+    const double PI = 3.14159;                  // read only, can't be modified. Useful for references and pointers
     int percentage = (x / (double)y) * 100;     // int/int will be int
 
     std::cout << "Hi" << z << '\n';   /* stndard char output, >> output, namespace1::var1 ; line terminator */
@@ -112,7 +112,38 @@ int main(){                                     // main fx()
 
     int array_2d[ row size ][ column size ]             : matrix, row size not neccessary
 
-    
+    memory address : location in memory where data is stored;       & : address of operator
+    std::cout << &var1 ;
+
+    normally when we pass variables to fx, we pass values (copy of values) of the var, they've different memory addresses 
+    to pass original value : pass by reference : use memory address
+    add     &       to variables at defn of fx
+    *  :     dereference operator
+
+    Pointer : var that stores memory address of another var, sometimes it is easier to work with address
+   
+    string var1 = "Bro";
+    string *p_var1 = &var1;     
+    cout << p_var1 ;        gives address of var1
+    cout << *p_var1 ;       gives value stored at address p_var1
+
+    arrays are already an address, so you dont need to use & for them
+    int *p_array = array;
+
+    Null value means something has no value
+    nullptr  : null pointer is a pointer holding null value, it is not pointing at anything
+    nullptr are helpful when determining whether a pointer has been assigned an address or not
+    dereferencing a nullptr or a pointer that hasn't been assigned any address i.e pointing to free memory
+    it leads to unexpected issues( *pointer )
+   
+    int *pointer = nullptr ;
+    pointer = &var1;
+    if (pointer == nullptr){
+        cout << "Address was not assigned";
+    }
+
+
+
 */
     
     return 0;                               
