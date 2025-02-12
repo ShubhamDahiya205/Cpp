@@ -1,5 +1,5 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
+using namespace std;
 int main(){
     std::string name;
     int age;
@@ -9,7 +9,7 @@ int main(){
     std::getline(std::cin >> std::ws, name);
     std::cout << "Your name is " << name << " and \n";
     std::cout << "You're " << age << " years old.\n";
-    (name == "Natsuki Subaru") ? std::cout << "You can RBD.\n" : std::cout << "SUbaru is a nice guy\n";
+    (name == "Natsuki Subaru") ? std::cout << "You can RBD.\n" : std::cout << "Subaru is a nice guy\n";
     switch (age)
     {
     case 7 :

@@ -1,3 +1,4 @@
+#include <bits\stdc++.h>
 #include <iostream>                             // includes input-output fxs header file
 #include <vector>
 #include <string>                               // for std::getline()
@@ -5,6 +6,7 @@
 #include <ctime>                                // for srand(time(NULL))
 #include <iomanip>                              // for std::setprecision(decimal places) << std::fixed << var
 #include <limits>                               // for std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '/n')
+using namespace     std;
 
 /* Namespace allows identically named entities as long as their namespaces are different */ 
 namespace first_ns{
@@ -41,8 +43,8 @@ int main(){                                     // main fx()
     std::cout << "Full name : ";
     std::getline(std::cin >> std::ws, full_name); // reads space too, 
     std::cout << full_name;
-
-/* fail > clear > ignore()     \\fail may not be necessary
+/* 
+    fail > clear > ignore()      
     std::cin.fail()             : if wrong data type entered
     std::cin.clear();           : resets error flags when cin fails to interpret the input
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
@@ -143,6 +145,120 @@ int main(){                                     // main fx()
     }
 
 
+    dynamic memory : is the memory that is allocated after the program is compiled and running. allocates memory to heap instead of stack
+    use 'new' keyword : useful when we dont know how much memory we need, (must use delete as well)
+    int *pNum = NULL;
+    pNum  = new int;            // we are storing the integer at the address pNum;  not a particular value, we're storing memory of 1 integer
+    *pNum = 21;                 //store value in pNum any time
+    ...
+    delete pNum;                //deleting the pointer, freeing up the memory at that address to prevent memory leak,
+
+    int *pNum = NULL;           // declaring a Null pointer
+    pNum = new int[size];       // pointer now pointst to an array of length = size, 
+    for(){
+        std::cin >> pNum[i];
+    }
+    ..
+    delete[] pNum              // for deleteing array
+
+Recursion : less code, cleaner, useful for sorting and searching algo but more memory consumption, slower
+function tmeplate: describes what a fx looks like, used to generate as many overloaded fxs as needed, each using diff data types
+
+    int max(int x, int y){              // now if i dont wanna repeat this for double and char data type as well
+        return (x > y) ? x : y;     
+    }
+    template <typname T>                //decleration of T : functional template genrator
+    T fx1(T x){}                        // T : data type can be any one
+
+    template <typename T1, typename T2>             
+    auto max(T1 x, T2 y){                           
+        return (x > y) ? x : y;
+    }
+    
+    structure : groups related variables under one name, can contain diff dt types, variables inside are called members, 
+        to access memeber : Class Member Access Operators 
+    
+    struct Student{            // like class, it is like a new datatype and can be used to declare more variables, that have members
+        std::string name;      // name is a member
+        double gpa;
+        bool enrolled = true;  // default value = true
+        }
+
+    Student st1;
+    st1.name = "name1";
+    print_gpa(&st1)
+
+    void print_gpa(Student &st){
+        st1.gpa;
+    }
+
+    enums - enumeration : is a user defined data type, that contains paired named-integer constants
+    
+    enum Day { sunday = 0, monday = 1, ....}    // if you don't assign, there's implicit association to 0,1,2..
+    int main() { 
+    Day today = monday;       // we can't use string for switch case
+    switch (today){           // today i.e. sunday is inherently associated with the integer 0
+        case "sunday": ...    // case 0 is also valid
+        break;
+        }
+        
+    }
+
+    Object- collection of attributes (properties) and methods (fxs) (think of objects as real life obj : Dog : name,age,breed; bark, sit, fetch)
+    Class - blueprint to create objects
+    method : fx that belongs to a class
+    constructor : special method that is automatically called when an object is instantiated
+    getters and setter come under abstraction (i.e. hiding any unnecessary data from outside the class)
+    getters : fx that makes a private attribute readable
+    setters : fx that makes a private attribute writable
+
+
+    class Human{
+        private:
+            double gpa = 9.328;
+        double get_gpa(){
+          return gpa;    
+        }
+        void set_gpa(double gpa){
+            if (gpa < 10){
+                this->gpa = gpa;
+            }  else {
+                this->gpa = 10;  
+            }
+    }
+
+        public:            //public access modifier, methods and atts to be publically accessible
+            std::string name;
+            std::string occupation;
+            int age;
+
+            void eat(){
+                std::cout << "This person is eating\n";
+            void drink(){
+                std::cout << "This person is drinking\n";
+            void sleep(){
+                std::cout << "This person is sleeping\n";
+           }
+        Student(std::string name, int age){      \\constructor: if Student(std::string x, int y){
+            std::cout << "Name is Slim Shady";   
+            this->name = name;          name = x;
+            this->age = age;            age = y;
+        }
+        Student(std::string occupation){    \\ overloading constructor: multiple constructors with the same name but diff parameters
+            std::cout >> "Occupation is Rap";
+            this->occupation = occupation;
+        }
+        Student(){}
+        };
+    Human human1("John Doe", 28);
+    human1.occupation = "Prompt Engineer"
+    human1.eat();
+
+    class Topper : public Student{  \\ just creating a topper object will make him have attributes and methods that student has
+        public:
+            void study(){}
+    };
+    
 
 */
     
