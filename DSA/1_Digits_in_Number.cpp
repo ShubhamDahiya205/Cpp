@@ -1,4 +1,4 @@
-// count number of digits in a number
+// Count number of digits in a number
 #include <bits\stdc++.h>
 using namespace std;
 
@@ -11,6 +11,8 @@ int count_digits(int n){
     }
     return digits;
 }
+
+// Time Complexity : O(1)
 int count_digits_log(int n){
     return log10(n) + 1;
 }
