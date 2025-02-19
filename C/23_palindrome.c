@@ -1,8 +1,6 @@
 #include <stdio.h>
-
 int main() {
     int num, originalNum, reversedNum = 0, digit;
-
     // Taking input from the user
     printf("Enter a number: ");
     scanf("%d", &num);
@@ -22,6 +20,5 @@ int main() {
     } else {
         printf("%d is not a Palindrome number.\n", originalNum);
     }
-
     return 0;
 }

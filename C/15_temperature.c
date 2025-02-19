@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 int main(){
     float t;
     printf("Enter temperature in fahrenheit : ");

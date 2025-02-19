@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 int main() {
     int marks;
     printf("Enter the marks (0-100): ");
@@ -26,6 +25,5 @@ int main() {
     else {
         printf("Grade: F (Fail)\n");
     }
-
     return 0;
 }
