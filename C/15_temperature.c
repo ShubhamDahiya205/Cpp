@@ -6,7 +6,7 @@ int main(){
     scanf("%f", &t);
     t = (t- 32) * 5 / 9;
     printf("Temperature in celcius is : %f \n", t);
-    printf("Enter temperature in fahrenheit : ");
+    printf("Enter temperature in celcius : ");
     scanf("%f", &t);
     t = (t * 9 / 5) + 32;
     printf("Temperature in fahrenheit is : %f \n", t);
