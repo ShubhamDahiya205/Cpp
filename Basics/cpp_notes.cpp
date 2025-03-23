@@ -14,7 +14,7 @@ namespace first_ns{
     using std::cout;                            // same
     int z = 1;                                  
 }
-
+bool comp();
 void fx_name1();
 typedef std::vector<std::pair<std::string, int>> pairlist_t;//alias for datatype,ease&readability 
 using text_t = std::string;                     // like typedef but works better w/ template
@@ -22,11 +22,15 @@ using text_t = std::string;                     // like typedef but works better
 int main(){                                     // main fx()
     using namespace first_ns;                   // this or namespace1::var1
     int x, y;                                   // declaration
+    unsigned long a;                            // only positive values
+    long long x;
+    float a; double b;                          // diff range
+    signed int x;                               // both positive and negative values             
     x = 1;                                      // assignment                   
     y = 2;                                      //x (+ - * / %) 1, x += 1, x++
     int sum = x + y;                            // decimal places are truncated in int
     double price = (int) 1.23;                  //double = float, int/int is converted to int
-    char initial = 'S';                         // single char only     
+    char initial = 'S';                         // single char only, double for string     
     char d = 100;                               //ascii value                     
     bool t_false = true;                        // boolean
     std::string first_name = "Bum";             // object that stores multiple char, in double quotes
@@ -37,7 +41,7 @@ int main(){                                     // main fx()
     std::cout <<"What's you first Name" << std::endl;     // \n is better, endl flushes output buffer
     
     int age;
-    std::string full_name;           
+    std::string full_name;                      // it's an array of characters
     std::cin >> age;           // input and extraction operator >>, cin stops reading at space, 
 //cin gives a \n in inner input buffer, getline accepts \n as input, to prevent, add >> std::ws to getline
     std::cout << "Full name : ";
@@ -99,6 +103,7 @@ int main(){                                     // main fx()
     array1[0] = new_dt
     int array2[5];                                  : fixed size of array
     array1[index].empty()                           : T/F
+    arr.size()
     
     sizeof(var/data_type)                           : returns size in bytes
     sizeof(array1) / sizeof(data_type of array)     : gives length of array 
@@ -121,6 +126,7 @@ int main(){                                     // main fx()
     to pass original value : pass by reference : use memory address
     add     &       to variables at defn of fx
     *  :     dereference operator
+    for arrays no need to add &, it is anyways passed by reference
 
     Pointer : var that stores memory address of another var, sometimes it is easier to work with address
    
@@ -259,6 +265,143 @@ function tmeplate: describes what a fx looks like, used to generate as many over
             void study(){}
     };
     
+    Containers
+
+    Pairs:
+    pair< datatype1, datatype2> var_name = { value1, value2 }
+    var_name.first  : gives first element
+
+    pair<int, int> arr[] = { array of pairs }
+    arr[1].second
+
+    
+    Vector : dynamic : size can be increased anytime
+    vector<datatype> var_name;
+    var_name.push_back(1);          : appends at last
+    var_name.emplace_back(3);       : appends at last, faster than pushback
+
+    vector<pair<int, int>> v1;
+    v1.push_back( {1, 2} );
+    v1.emplace_back( 1, 2 );
+
+    vector<int> v1(5);              : container with 5 instances of 0/garbage value depending on compiler, pushback still works
+    vector<int> v1(5, 100);         : {100, 100, 100, 100, 100}
+    vector<int> v2(v1);             : v2 will be a copy of v1
+    
+    v2[0] / v2.at(0)
+    v.back() : gives last element
+
+    vector<int>::iterator it = v.begin() : v.begin() gives the memory address of first element of vector v
+    cout << *(it) << '\n';
+    it++;
+    v.begin()/end()/rend()/       : end() points to memeory AFTER the last element, reverse-end points to memory BEFORE first element, 
+    v.rbegin()                    : reverse begin points to memory of last element, it++ will move to 2nd last
+
+    for (vector<int>::iterator it = v.begin(); it != v.end(); it++){cout << *(it);}
+    for (auto it = v.begin(); it != v.end(); it++){cout << *(it);}
+    for (auto it : v){cout << it;} : not a pointer anymore
+
+    auto var_name = data;  auto automatically assigns data-type according to the data
+
+    v.erase(memory address of element you want to be removed);
+    v.erase(starting address, address after the ending address);
+
+    v.insert(address, element);
+    v.insert(address, no. of elements to be inserted, element);   it will insert 'n' times the same element at that location
+    v.insert(address, v1.begin(), v1.end());                    it will insert the entire vector inside v
+
+    v.size()/pop_back()/clear()     : clear makes it an empty vector
+    v.empty() :
+    v.swap(v2)                      : swaps both vectors
+    
+    List : dynamic, 
+    list<data_type> ls;             
+    ls.push_back(element)/emplace_back()/push_front(element) : push front inserts at beginning, much faster than insert
+    ls.emplace_front(element1)
+    begin/end/clear/size/empty/rend/rbegin
+
+    Dequeue : same as list, methods too
+
+    Stack : LIFO last in first out, it doesn't have index, all methods in O(1)
+    stack<int> st;
+    st.push(1)      {1}
+    st.push(2)      {2, 1}
+    st.emplace(3)   {3, 2, 1}
+    st.top()      : gives 3
+    st.pop()      : gives 3, and dlts it from stack
+    st.size()/empty()/swap()
+
+    Queue : FIFO first in first out,
+    queue<int> q;
+    push(1), push(2), emplace(3),  {1, 2, 3}
+    back() gives last entered element : 3
+    front() gives first entered element : 1
+    pop() : pops out first element
+    size/swap/empty
+
+    Priority Queue : element with largest value stays at the top, {10, 4, 2, 1}
+    priority_queue<dt> pq; (max heap)
+    push/emplace/top/pop/size/swap/empty  : pop pops out largest element, Push O(log(n)), top O(1), pop O(log(n))
+
+    to make queue with minimum element at the top (min heap)
+    priority_queue<int, vector<int>, greater<int>> pq;
+
+    Set : stores in sorted order and only unique element {1, 2 , 3, 4}, all methods O(log n)
+    set<int> set1;
+    insert(element)/emplace()/begin/end/rbegin/rend/size/erase(5 or address)/erase(address1, add2):deletes elements from 1 to address before 2
+    count(2) : 1 or 0
+    auto it = set1.find(3);     Returns an iterator that points to address of 3, if 3 not found, it returns set1.end()
+    set.lower_bound(n) : returns the index s.t. arr[index] >= n, else size of array
+    set.upper_bound(n) : retunrs
+
+    Multiset : same as set, but duplicates also allowed
+    erase(element) : erases all occurances of the element
+    erase(address) : only1
+    erase(starting address, last - 1)
+
+    Unordered Set : same as set but order is random, all methods O(1),(rarely the worst case O(N)) lowerbound and upperbound don't work
+    unordered set<int> set1;
+ 
+    map : dictionary, unique keys in sorted order, pair of key and value, O(log N)
+    map<int, int> mpp;
+    mpp[1] = 2;
+    mpp.insert({2, 3});
+    mpp.emplace({3, 4});  { {1, 2},  {2, 3}, {3, 4} }
+
+    for (auto it: mpp){ it.first, it.second....}
+
+    mpp.find(key)
+
+    MultiMap : same as map, but can store duplicate keys
+
+    Unorderedmap : same as map, but randomised order, O(1), worst case blue moon : O(N)
+
+    int a[4] = ...
+    sort(a.begin(), a.end())        : sorts the elements between these iterators
+    sort(a.begin() + 2, a.end(), greater<int>);  : reverse sort (descending order)
+
+    for custom sorting rules use self made comparator : comp : it's a boolean function
+    sort(p, p+n, comp); if the rule was "sort acc to 2nd element of pair, if same:sort acc to first element in desceneding"
+    comp takes two elements of container, returns true if correct order, returns false if the two elements need to be swapped.
+
+    setbits : '1', unsetbtis '0'
+    int count = __builtin_popcount(7); :binary of 7= 111; returns no. of setbits ('1') = 3
+    int count = __builtin_popcount(6); :binary of 6= 110; returns no. of setbits ('1') = 2
+    long long a= 65264198135;
+    __builtin__popcountll()
+
+    string s = "123"; no. of permutations = 3! = 6
+    do{
+    cout << s << "\n";
+    } while (next_permutation(s.begin(), s.end()));   :after all permutations, it returns false
+    
+    next_permutation gives the next dictionary permutation untill the end of the dict, so to get all permutations, string must be sorted
+
+    int max_i = *max_element( first iterator, last iterator + 1);
+    int min_i = *min_element( first iterator, last iterator + 1);
+
+
+
 
 */
     
@@ -275,3 +418,10 @@ int fx_name1(std::string name, int age){
     }
 }
 void fx_2(int integer1){}
+
+bool comp(pair<int, int> p1, pair<int, int> p2){
+    if (p1.second < p2.second){return true;}
+    if (p1.second > p2.second){return false;}
+    if (p1.first > p2.first){return true;}
+    return false;   
+}
