@@ -5,20 +5,22 @@
 using namespace std;
 
 // Time Complexity : O(log10(n))
-bool palindrome_check(int n){
-    int origianl = n;
-    int m = 0;
-    while (n > 0){
-        m = (m * 10) + (n % 10);
-        n = n / 10;
+
+bool isPalindrome(int x) {
+    if (x < 0) {return false;}
+    long long rev = 0;
+    int n = x;
+    while ( n!= 0 ){
+        rev = (rev * 10) + (n % 10);
+        n /= 10;
     }
-    return (origianl == m);
+    return (x == rev);
 }
 
 int main(){
     int n;
     cout << "Enter number : ";
     cin >> n;
-    (palindrome_check(n)) ? cout << "Palindrome\n" : cout << "Not a palindrome\n";
+    (isPalindrome(n)) ? cout << "Palindrome\n" : cout << "Not a palindrome\n";
     return 0;
 }
