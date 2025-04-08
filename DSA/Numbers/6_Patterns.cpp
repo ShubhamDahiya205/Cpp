@@ -25,6 +25,7 @@ void print22(int);
 void print23(int);
 void print24(int);
 void print25(int);
+void print26();
 
 using std::cout, std::cin;
 
@@ -56,7 +57,8 @@ int main() {
     print23(rows);
     print24(rows);
     print25(rows);
-    
+    print26();
+
     return 0;
 }
 
@@ -467,6 +469,19 @@ void print25(int n){
                 }
                 cout << last;
             }
+        }
+        cout << "\n";
+    }
+    cout << "\n";
+}
+
+void print26(){
+    cout << "Pattern 26" << "\n";
+    char str[] = "NATSUKI SUBARU";
+    int l = sizeof(str)/sizeof(str[0]) - 1;
+    for(int i = 1; i <= l; i++){
+        for (int j = 0; j < i; j++){
+            cout << str[j];
         }
         cout << "\n";
     }
