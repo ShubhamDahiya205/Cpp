@@ -22,6 +22,8 @@ void print1(int n, string name){
     if (!n) return;
     cout << name << '\n';
     print1(n - 1, name);
+    return;
+
 }
 
 void print2(int i, int n, string name){
