@@ -5,6 +5,7 @@ void print_arr(vector<int>);
 vector<int> bubble_sort(vector<int>);
 vector<int> selection_sort(vector<int>);
 vector<int> insertion_sort(vector<int>);
+vector<int> merge_sort(vector<int>);
 
 int main(){
     vector<int> arr = {2, 1, 4, 3, 4, 6, 5, 9, 10, 8, 7};
@@ -12,6 +13,7 @@ int main(){
     print_arr(bubble_sort(arr));
     print_arr(selection_sort(arr));
     print_arr(insertion_sort(arr));
+    print_arr(merge_sort(arr));
 
     return 0;
 }
@@ -69,5 +71,11 @@ vector<int> insertion_sort(vector<int> arr){
             }
         }
     }
+    return arr;
+}
+
+vector<int> merge_sort(vector<int> arr){
+    vector<int> sorted_arr;
+    
     return arr;
 }

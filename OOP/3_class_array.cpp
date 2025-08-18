@@ -66,6 +66,7 @@ int main() {
             stud_list[i].put_data();
         }
     }
+    cout << "\nBy - Shubham Dahiya (00414802724)" << '\n';
     return 0;
 }
 
